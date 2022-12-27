@@ -21,12 +21,19 @@ class Decision(models.Model):
     file_number = models.IntegerField("Numéro de dossier")
     last_update = models.DateField("Date de mise à jour")
     lecture_date = models.DateField("Date de lecture")
-    lawyer = models.CharField("Avocat requérant", max_length=30)
+    hearing_date = models.DateField("Date d'audience", null=True)
+    lawyer = models.CharField("Avocat requérant", default="", blank=True, max_length=30)
     decision_type = models.CharField("Type de décision", max_length=100)
-    appeal_type = models.CharField("Type de recours", max_length=100)
+    appeal_type = models.CharField(
+        "Type de recours", default="", blank=True, max_length=100
+    )
     publication_code = models.CharField("Code publication", max_length=20)
     solution = models.CharField("Solution", default="", blank=True, max_length=100)
     text = models.CharField("Texte intégral", max_length=100000)
+    role_number = models.IntegerField("Numéro de rôle", null=True)
+    jugement_format = models.CharField(
+        "Formation de jugement", default="", max_length=100
+    )
 
     legal_body = models.ForeignKey(
         LegalBody,
