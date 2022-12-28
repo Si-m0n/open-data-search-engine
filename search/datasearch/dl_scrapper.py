@@ -1,4 +1,4 @@
-# Download zip files, create directories accordingly and unzip the files
+# Download zip files, creates directories accordingly and unzip the files
 
 import zipfile
 import os
@@ -13,7 +13,7 @@ caa_url = "https://opendata.justice-administrative.fr/DCA/"
 
 ta_url = "https://opendata.justice-administrative.fr/DTA/"
 
-download_dir = "Projets/Scrapping/download/"
+download_dir = "open-data-search-engine/search/datasearch/download/datasearch/"
 
 
 def unzip(path_to_zip_file, directory_to_extract_to):
@@ -42,12 +42,13 @@ def dl_files(url_taget):
             files_name.append(link.text)
     # Download each file
     for i in range(len(files_links)):
-        print(files_name[i])
+        print("Downloading : " + files_name[i])
         path_dir = download_dir + files_name[i].rstrip(".zip") + "/"
         path_file = path_dir + files_name[i]
         os.mkdir(path_dir)
         with open(path_file, "wb") as file:
             response = re.get(files_links[i])
             file.write(response.content)
+        print("Unzipping : " + files_name[i])
         unzip(path_file, path_dir)
         os.remove(path_file)
