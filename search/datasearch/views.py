@@ -14,7 +14,7 @@ def xml_to_decision(xml_file):
     # Load the xml file with BeautifulSoup
     content = xml_file.readlines()
     content = "".join(content)
-    # Enlever le paramètre lxml si erreur
+    # Le paramètre "html.parser" renvoie un avertissement que l'on peut ignorer
     bs_content = bs(content, "html.parser")
 
     # Extract data from the xml file
