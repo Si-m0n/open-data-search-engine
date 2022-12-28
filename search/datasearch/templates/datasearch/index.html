@@ -1,3 +1,9 @@
 {% extends 'datasearch/base.html' %} {% block content %}
 <h1>Open Data Search</h1>
+
+<form action="" method="post">
+  {% csrf_token %} {{form.as_p}}
+  <input type="submit" value="Rechercher" />
+</form>
+
 {% endblock content %}

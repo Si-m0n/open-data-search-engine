@@ -21,4 +21,6 @@ from datasearch import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("index/", views.index, name="index"),
+    path("decision/<int:id>/", views.decision, name="decision"),
+    path("search_result/", views.search_result, name="search-result"),
 ]

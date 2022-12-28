@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datasearch.models import Decision, LegalBody
 from bs4 import BeautifulSoup as bs
-from search.settings import BASE_DIR
+from django.forms.models import model_to_dict
+from datasearch.forms import DecisionForm, SearchForm
 
 import os, zipfile, shutil
 import requests as re
@@ -9,9 +10,33 @@ import requests as re
 
 # Create your views here.
 def index(request):
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            # Implémenter la recherche
+            return render("search-result")
+    else:
+        form = SearchForm()
     return render(
         request,
         "datasearch/index.html",
+        {"form": form},
+    )
+
+
+def search_result(request):
+    return render(
+        request,
+        "datasearch/search_result.html",
+    )
+
+
+def decision(request, id):
+    decision = DecisionForm(data=model_to_dict(Decision.objects.get(id=id)))
+    return render(
+        request,
+        "datasearch/decision.html",
+        {"decision": decision},
     )
 
 

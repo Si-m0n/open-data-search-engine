@@ -11,7 +11,10 @@ class LegalBody(models.Model):
         "Type de juridiction", null=True, choices=LegalType.choices, max_length=20
     )
     legal_name = models.CharField("Nom de la juridiction", max_length=100)
-    legal_code = models.CharField("Code de la juridiction", max_length=20)
+    legal_code = models.CharField(
+        "Code de la juridiction",
+        max_length=20,
+    )
 
     def __str__(self):
         return self.legal_code
