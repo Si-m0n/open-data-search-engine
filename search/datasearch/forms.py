@@ -11,4 +11,4 @@ class DecisionForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     numero_de_dossier = forms.IntegerField(required=False)
-    contenu = forms.CharField(max_length=1000)
+    contenu = forms.CharField(max_length=1000, required=False)

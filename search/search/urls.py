@@ -22,5 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("index/", views.index, name="index"),
     path("decision/<int:id>/", views.decision, name="decision"),
-    path("search_result/", views.search_result, name="search-result"),
+    path("search_result/<str:content>/", views.search_result, name="search-result"),
+    path("no_result/", views.no_result, name="no-result"),
 ]

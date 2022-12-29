@@ -14,7 +14,16 @@ def index(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             # Implémenter la recherche
-            return render("search-result")
+            file_number = form["numero_de_dossier"].value()
+            if file_number:
+                try:
+                    decision = Decision.objects.get(file_number=file_number)
+                    return redirect("decision", decision.id)
+                except:
+                    return redirect("no-result")
+            else:
+                content = form["contenu"].value()
+                return redirect("search-result", content)
     else:
         form = SearchForm()
     return render(
@@ -24,10 +33,24 @@ def index(request):
     )
 
 
-def search_result(request):
+def search_result(request, content):
+    # Cherche si une décision porte le numéro de dossier recherché
+    try:
+        results = Decision.objects.filter(text__icontains=content)
+    except:
+        return redirect("no-result")
+
     return render(
         request,
         "datasearch/search_result.html",
+        {"results": results},
+    )
+
+
+def no_result(request):
+    return render(
+        request,
+        "datasearch/no_result.html",
     )
 
 

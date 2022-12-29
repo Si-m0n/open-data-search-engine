@@ -1,4 +1,16 @@
 {% extends 'datasearch/base.html' %} {% block content %}
 <h1>Résultats de la recherche :</h1>
 
+<ul>
+  {% for decision in results %}
+  <li>
+    <a href="{% url 'decision' decision.id %}"> {{decision.file_number}}</a>
+    <p>
+      Date de lecture : {{decision.lecture_date}}
+      {{decision.legal_body.legal_name}}
+    </p>
+  </li>
+  {% endfor %}
+</ul>
+
 {% endblock content %}
